@@ -203,17 +203,45 @@ public class CalendarStuff {
    long day2;
    long year2;
 
-   public static long daysBetween( long month1, long day1, long year1, long month2, long day2, long year2 ) {
-     long dayCount = 0;
-     if(daysInMonth(month1,year1)) {
+   public static long daysBetween(long month1, long day1, long year1, long month2, long day2, long year2) {
+        long dayCount = 0;
+        long[] monthArray = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        long days = day2 -day1;
+        long monthsInDays1 = 0;
+        long monthsInDays2 = 0;
 
 
-     }
-     year1 = year1 * 365.25;
-     year2 = year2 *365.25;
 
 
-      return dayCount;
-   }
+        for (int i = 0; i <= month1 - 2; i++) {
+
+                    monthsInDays1 += monthArray[i];
+
+        }
+        for (int i = 0; i <= month2 - 2; i++) {
+
+            monthsInDays2 += monthArray[i];
+
+        }
+        long adjustedYear1 = year1 - 1;
+
+        if(isLeapYear(adjustedYear1)) {
+            adjustedYear1 = (long) (365.25* adjustedYear1);
+        }else {
+            adjustedYear1 = (long) 365.25* (adjustedYear1 - adjustedYear1%4) + (adjustedYear1%4)*365;
+        }
+
+        long adjustedYear2 = year2 - 1;
+
+        if(isLeapYear(adjustedYear2)) {
+            adjustedYear2 = (long) (365.25* adjustedYear2);
+        }else {
+            adjustedYear2 = (long) 365.25* (adjustedYear2 - adjustedYear2%4) + (adjustedYear2%4)*365;
+        }
+
+        dayCount = Math.abs(monthsInDays1 - monthsInDays2) + Math.abs(adjustedYear1 - adjustedYear2) +Math.abs(days);
+
+        return dayCount;
+    }
 
 }
