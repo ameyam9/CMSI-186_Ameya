@@ -22,7 +22,7 @@
  *  @version 1.0.0  2017-01-02  B.J. Johnson  Initial writing and release
  *  @version 1.0.1  2017-12-25  B.J. Johnson  Updated for Spring 2018
  */
-public class CalendarStuffEmpty {
+public class CalendarStuff {
 
   /**
    * A listing of the days of the week, assigning numbers; Note that the week arbitrarily starts on Sunday
@@ -48,9 +48,9 @@ public class CalendarStuffEmpty {
   /**
    * The constructor for the class
    */
-   public CalendarStuffEmpty() {
-      System.out.println( "Constructor called..." );  // replace this with the actual code
-   }
+   //public CalendarStuffEmpty() {
+      //System.out.println( "Constructor called..." );  // replace this with the actual code
+   //}
 
   /**
    * A method to determine if the year argument is a leap year or not<br />
@@ -60,9 +60,15 @@ public class CalendarStuffEmpty {
    */
    long year;
    public static boolean isLeapYear( long year ) {
+      if(year % 4 == 0 && year % 100 != 0) {
+            return true;
+      }
+      if(year % 400 == 0){
+        return true;
+      }
+      return false;
 
-      return true;
-   }
+    }
 
   /**
    * A method to calculate the days in a month, including leap years
@@ -72,11 +78,19 @@ public class CalendarStuffEmpty {
    * notes: remember that the month variable is used as an indix, and so must
    *         be decremented to make the appropriate index value
    */
-  long month ;
-  long year;
-
+  long month;
    public static long daysInMonth( long month, long year ) {
-      return 33;  // replace this with the actual code
+     if(isLeapYear(year) == true && month == 2){
+       return 29;
+     }if(month == 2){
+       return 28;
+     }if(month== 4|| month == 6 || month ==9|| month ==11) {
+       return 30;
+     }else{
+       return 31;
+     }
+
+
    }
 
   /**
@@ -116,9 +130,38 @@ public class CalendarStuffEmpty {
    * notes: remember that the month and day variables are used as indices, and so must
    *         be decremented to make the appropriate index value
    */
+   long day;
+
    public static boolean isValidDate( long month, long day, long year ) {
-      return true;  // replace this with the actual code
-   }
+     try {
+            if(month <= 0 || day <= 0 || year <= 0) {
+                return false;
+            }
+            if(day >= 32){
+                return false;
+            }if(month >= 13) {
+              return false;
+            }
+
+            if(month == 2){
+                if(!isLeapYear(year)){
+                    if(day >= 29){
+                        return false;
+                    }
+                }
+
+            }
+        }
+        catch (Exception e){
+            System.out.println("Error, please input valid dates.");
+        }
+        return true;  // replace this with the actual code
+
+    }
+
+
+
+
 
   /**
    * A method to return a string version of the month name
@@ -151,9 +194,25 @@ public class CalendarStuffEmpty {
    * @param    day2   long   containing day number
    * @param    year2  long   containing four-digit year
    * @return          long   count of total number of days
+
    */
+   long month1;
+   long day1;
+   long year1;
+   long month2;
+   long day2;
+   long year2;
+
    public static long daysBetween( long month1, long day1, long year1, long month2, long day2, long year2 ) {
-      long dayCount = 0;
+     long dayCount = 0;
+     if(daysInMonth(month1,year1)) {
+
+
+     }
+     year1 = year1 * 365.25;
+     year2 = year2 *365.25;
+
+
       return dayCount;
    }
 
