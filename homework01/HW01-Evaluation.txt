@@ -1,0 +1,48 @@
+
+Evaluation for homework 01: Calendar Stuff and CountTheDays
+
+CalendarStuff and CountTheDays program
+Includes running CalendarStuffTester test program
+Includes running automated CountTheDays program
+=================================================
+
+Comments:
+---------
+There are some problems here.  You didn't implement any code for the
+"dateEquals()"" and "compareDate()" methods so I don't know how you
+can tell if two dates are equal or out of order.  Secondly, in your
+"daysBetween()" method I think you aren't counting the days correctly.
+This will cause you to fail on your "CountTheDays" program.  Next,
+we are dealing with whole number years, not 365.25 days per year --
+I realize that's the correct duration, but we are handling leap years
+to cover that.
+
+Perhaps we can have an office hour session so that I can clarify a
+few things.  Please feel free to schedule something in YouCanBookMe
+or drop by my office.
+
+
+A total of one point each for the following:
+
+class CalendarStuff: file exists                      - 1 point
+isLeapYear         : works properly                   - 1 point
+daysInMonth        : works properly                   - 1 point
+dateEquals         : works properly                   - 1 point
+compareDate        : works properly                   - 1 point
+isValidDate        : works properly                   - 1 point
+daysBetween        : works properly                   - 0.5 point
+CountTheDays       : file exists                      - 1 point
+Files in Git       : all three java files in repo     - 1 point
+Coding Style       : see comments                     - 1 point
+Test Code          : runs all, gets correct results   - 0 point
+
+Note: 12 tests for CountTheDays
+      79 tests for calendarStuffTester
+      91 tests total
+
+
+Total 9.5 out of 11 = 86.36% which is a B
+
+
+Nice work!
+
