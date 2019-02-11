@@ -8,11 +8,10 @@ public class DiceSet {
     private int count;
     private int sides;
     private Die[] ds = null;
-    private int[] intValue  = new int[1000];
+    private int[] intValue;
 
 
     public DiceSet(int count, int sides) {
-
         if(count < 1 ) {
             throw new IllegalArgumentException("Wrong Number of Dice Used");
         }
@@ -22,7 +21,7 @@ public class DiceSet {
 
         this.count = count;
         this.sides = sides;
-        //ds = new Die[count];
+        intValue = new int[count];
         roll();
     }
 
