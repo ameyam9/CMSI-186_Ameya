@@ -1,7 +1,8 @@
-
+//Some code was taken from B.Johnson's MainProgLoopsDemo.java
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+
 public class HighRoll {
 
     public static void main(String args[]) {
@@ -14,7 +15,7 @@ public class HighRoll {
             System.out.println("Invalid Arguments");
             System.out.println("Java HighRoll <number of dice> <number of sides>");
             System.exit(0);
-        }else {
+        }else{
           try {
             numbDice = Integer.parseInt(args[0]);
             numbSides = Integer.parseInt(args[1]);
@@ -28,14 +29,12 @@ public class HighRoll {
             System.exit(0);
         }
         DiceSet ds = new DiceSet(numbDice, numbSides);
-
-
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
             System.out.println("\n");
             System.out.println("\n");
             System.out.println("\n");
-            System.out.println("\n   Welcome to the HighRoll!!\n");
+            System.out.println("\n   WElCOME TO HIGHROLL!!\n");
             System.out.println("ENTER 1 TO ROLL ALL THE DICE");
             System.out.println("ENTER 2 ROLL A SINGLE DIE");
             System.out.println("ENTER 3 CALCULATE THE SCORE FOR THIS SET");

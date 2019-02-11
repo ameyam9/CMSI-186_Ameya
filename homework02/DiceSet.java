@@ -1,15 +1,13 @@
 import java.util.Random;
 public class DiceSet {
     public static void main(String[] args) {
-
-
+      //Die myDie = new Die(5);
     }
 
     private int count;
     private int sides;
     private Die[] ds = null;
     private int[] intValue;
-
 
     public DiceSet(int count, int sides) {
         if(count < 1 ) {
@@ -18,7 +16,6 @@ public class DiceSet {
         if(sides <4 ){
             throw new IllegalArgumentException("Wrong Number of Sides");
         }
-
         this.count = count;
         this.sides = sides;
         intValue = new int[count];
@@ -33,22 +30,16 @@ public class DiceSet {
         return totalSum;
     }
 
-
     public void roll() {
         for(int i =0; i<count; i++){
-
             rollIndividual(i);
         }
     }
 
-
     public int rollIndividual(int dieIndex) {
-
         intValue[dieIndex] = (int) (1 +(Math.random() * (sides -1)) +1);
-
         return  intValue[dieIndex];
     }
-
 
     public int getIndividual(int dieIndex) {
         int dieValue = intValue[dieIndex];
@@ -60,25 +51,22 @@ public class DiceSet {
         for(int i = 0; i< count; i++){
             result =    result +"["+intValue[i] + "]";
         }
-
-        return  result  ;
+        return  result;
     }
-
 
     public static String toString(DiceSet ds) {
         return ds.toString();
     }
 
-       public boolean isIdentical( DiceSet ds ) {
-           if(ds.count != this.count || ds.sides != this.sides){
-               return false;
-           }
+    public boolean isIdentical( DiceSet ds ) {
+        if(ds.count != this.count || ds.sides != this.sides){
+              return false;
+        }
            for(int i = 0; i<count; i++){
                if(ds.intValue[i] != this.intValue[i]){
                    return false;
                }
            }
-           return true;
+          return true;
        }
-
 }
