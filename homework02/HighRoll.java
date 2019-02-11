@@ -30,11 +30,11 @@ public class HighRoll {
         }
         DiceSet ds = new DiceSet(numbDice, numbSides);
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("\n   WElCOME TO HIGHROLL!!\n");
         while (true) {
             System.out.println("\n");
             System.out.println("\n");
             System.out.println("\n");
-            System.out.println("\n   WElCOME TO HIGHROLL!!\n");
             System.out.println("ENTER 1 TO ROLL ALL THE DICE");
             System.out.println("ENTER 2 ROLL A SINGLE DIE");
             System.out.println("ENTER 3 CALCULATE THE SCORE FOR THIS SET");
