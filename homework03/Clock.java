@@ -22,17 +22,7 @@ public class Clock{
      */
 
     public Clock() {
-      if(angle > MAXIMUM_DEGREE_VALUE || angle < 0.0) {
-        throw new IllegalArgumentException("Input a Positive Angle or an Angle Less Than or Equal to 360.0");
-      }
-      if (timeSlice < 0.0 || timeSlice > 1800.0){
-        throw new IllegalArgumentException("Input a Positive Value  or a Value less than 1800.0 ");
-        }
-        // if(timeSlice != DEFAULT_TIME_SLICE_SECONDS) {
-        //   timeSlice = timeSlice;
-        // }else {
-        //   timeSlice = DEFAULT_TIME_SLICE_SECONDS;
-        // }
+
     }
     /**
      *  Methods go here
@@ -41,12 +31,23 @@ public class Clock{
      *  @return double-precision value of the current clock tick
      */
 
-     double tick  = 0.0;
+
     public double tick() {
+    // double tick;
+    // double minuteIncrementBy = MINUTE_HAND_DEGREES_PER_SECOND * 60.0 * (timeSlice/60.0);
+    // double hourIncrementBy = HOUR_HAND_DEGREES_PER_SECOND * 60.0 *(timeSlice/60.0);
+    // minuteHandAngle = minuteHandAngle + minuteIncrementBy;
+    // hourHandAngle = hourHandAngle + hourIncrementBy;
+    // hourHandAngle = hourHandAngle % MAXIMUM_DEGREE_VALUE;
+    // minuteHandAngle= minuteHandAngle % MAXIMUM_DEGREE_VALUE;
+   return seconds + timeSlice;
 
-tick = 60.0;
 
-        return tick;
+
+    GONE TO RESYROOM
+
+
+        return 0.0;
     }
 
     /**
@@ -57,7 +58,7 @@ tick = 60.0;
      */
 
     public double validateAngleArg( String argValue ) throws NumberFormatException {
-    double validAngle = Double.parseDouble(argValue);
+      double validAngle = Double.parseDouble(argValue);
         return validAngle;
     }
 
@@ -105,6 +106,7 @@ tick = 60.0;
      */
 
     public double getHandAngle() {
+
       double getHandAngle = Math.abs(getHandAngle() - getMinuteHandAngle());
       return getHandAngle;
 
@@ -125,11 +127,15 @@ tick = 60.0;
      *  Method to return a String representation of this clock
      *  @return String value of the current clock
      */
+
     public String toString() {
+      String resultString = " ";
+      if() {
+
+      }
         return "Clock string, dangit!";
     }
     public static void main( String args[] ) {
-
         System.out.println( "\nCLOCK CLASS TESTER PROGRAM\n" +
                 "--------------------------\n" );
         System.out.println( "  Creating a new clock: " );
@@ -141,7 +147,6 @@ tick = 60.0;
         // System.out.println(clock.getMinuteHandAngle());
         System.out.println( "    Testing validateAngleArg()....");
         System.out.print( "      sending '  0 degrees', expecting double value   0.0" );
-
         try {
             System.out.println( (0.0 == clock.validateAngleArg( "0.0" )) ? " - got 0.0" : " - no joy" );
         }
