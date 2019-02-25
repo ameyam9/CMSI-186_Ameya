@@ -1,0 +1,59 @@
+
+Evaluation for homework 03: Dice Game
+
+Die, DiceSet, and HighRoll Program
+Includes running DieAndDiceSetTestHarness
+Includes running automated HighRoll tests
+=========================================
+
+COMMENTS:
+
+I had to take 1/2 point off for the "rollIndividual()" method, which
+ONLY rolls the die at index 1, NOT a user-selected die.  It would also
+have been helpful to have some output after each selection to see the
+result of the operation on the dice set, but I didn't take off points
+for that since it wasn't specified.
+
+It was left as an exercise for you, not just as the programmer but
+also looking from the USER perspective, to realize that knowing the
+result would be useful.  
+
+A total of one point each for the following:
+
+class Die         : Exists, coding style acceptable   - 1 point
+constructor       : works                             - 1 point
+roll              : works                             - 1 point
+getValue          : works                             - 1 point
+setSides          : works                             - 1 point
+instan. toString  : works                             - 1 point
+class toString    : works                             - 1 point
+main for testing  : Exists, with some tests in it     - 1 point
+
+class DiceSet     : Exists, coding style acceptable   - 1 point
+constructor       : works                             - 1 point
+sum               : works                             - 1 point
+roll              : works                             - 1 point
+rollIndividual    : works                             - 0.5 point
+getIndividual     : works                             - 1 point
+instan. toString  : works                             - 1 point
+class toString    : works                             - 1 point
+isIdentical       : works                             - 1 point
+main for testing  : Exists, with some tests in it     - 1 point
+
+class HighRoll    : Exists, coding style acceptable   - 1 point
+TUI:              : works, all options present        - 1 point
+option 1 roll all : works                             - 1 point
+option 2 roll one : works                             - 1 point
+option 3 sum      : works                             - 1 point
+option 4 save     : works                             - 1 point
+option 5 display  : works                             - 1 point
+option 6 quit     : works                             - 1 point
+
+Files in Git      : all three present                 - 1 point
+Test Harness      : passes all evaluation tests       - 1 point
+HighRoll          : passes all evaluation tests       - 2 point
+
+Total 29.5 out of 30 = 98.33% which is still an A-plus
+
+Nice work!
+
