@@ -33,18 +33,15 @@ public class Clock{
 
 
     public double tick() {
-    // double tick;
-    // double minuteIncrementBy = MINUTE_HAND_DEGREES_PER_SECOND * 60.0 * (timeSlice/60.0);
-    // double hourIncrementBy = HOUR_HAND_DEGREES_PER_SECOND * 60.0 *(timeSlice/60.0);
-    // minuteHandAngle = minuteHandAngle + minuteIncrementBy;
-    // hourHandAngle = hourHandAngle + hourIncrementBy;
-    // hourHandAngle = hourHandAngle % MAXIMUM_DEGREE_VALUE;
-    // minuteHandAngle= minuteHandAngle % MAXIMUM_DEGREE_VALUE;
-   return seconds + timeSlice;
+      seconds += timeSlice;
+         getHourHandAngle();
+         getMinuteHandAngle();
+         getHandAngle();
+         return seconds;
 
 
 
-    GONE TO RESYROOM
+
 
 
         return 0.0;

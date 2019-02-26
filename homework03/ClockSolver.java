@@ -56,8 +56,6 @@ public class ClockSolver extends Clock {
           if (inpuTimeSlice < 0.0 || inputTimeSlice > MAX_TIME_SLICE_IN_SECONDS){
               throw new IllegalArgumentException("Input a Positive Value  or a Value less than 1800.0 ");
           }
-
-
       }
 
     public void processAngle() {
