@@ -1,4 +1,4 @@
-
+import java.text.DecimalFormat;
 public class Clock{
 
     /**
@@ -10,11 +10,12 @@ public class Clock{
     private static final double HOUR_HAND_DEGREES_PER_SECOND = 0.00834;
     private static final double MINUTE_HAND_DEGREES_PER_SECOND = 0.1;
     private double seconds = 0.0;
+    private double hour = 0.0;
+    private double minutes = 0.0;
     private double angle;
-    private double timeSlice;
+    private double inputTimeSlice;
     private double minuteHandAngle = 0.0;
     private double hourHandAngle = 0.0;
-
 
 
     /**
@@ -22,6 +23,7 @@ public class Clock{
      */
 
     public Clock() {
+
 
     }
     /**
@@ -33,18 +35,21 @@ public class Clock{
 
 
     public double tick() {
-      seconds += timeSlice;
-         getHourHandAngle();
-         getMinuteHandAngle();
-         getHandAngle();
-         return seconds;
+      seconds += inputTimeSlice;
+      minuteHandAngle = minuteHandAngle + (MINUTE_HAND_DEGREES_PER_SECOND * inputTimeSlice);
+      hourHandAngle = hourHandAngle + (HOUR_HAND_DEGREES_PER_SECOND * inputTimeSlice);
+      hourHandAngle %= MAXIMUM_DEGREE_VALUE;
+      minuteHandAngle %= MAXIMUM_DEGREE_VALUE;
 
+      // getHourHandAngle();
+      // getMinuteHandAngle();
+      // getHandAngle();
 
+      //System.out.println(minuteHandAngle + "//" + hourHandAngle);
+      System.out.println(minuteHandAngle + "//" + hourHandAngle);
+      System.out.println("timeSlice " +  inputTimeSlice);
 
-
-
-
-        return 0.0;
+      return seconds;
     }
 
     /**
@@ -70,11 +75,12 @@ public class Clock{
      *  note: remember that the time slice, if it is small will cause the simulation
      *         to take a VERY LONG TIME to complete!
      */
-    public double validateTimeSliceArg( String argValue ) {
-      double timeSliceArg = 0.0;
-      timeSliceArg = Double.parseDouble(argValue);
-      timeSlice = timeSliceArg;
-        return timeSlice;
+    public double validateArg( String argValue ) {
+      double inputTimeSliceArg = 0.0;
+
+      inputTimeSliceArg = Double.parseDouble(argValue);
+      inputTimeSlice = inputTimeSliceArg;
+        return inputTimeSlice;
     }
 
     /**
@@ -103,9 +109,8 @@ public class Clock{
      */
 
     public double getHandAngle() {
-
-      double getHandAngle = Math.abs(getHandAngle() - getMinuteHandAngle());
-      return getHandAngle;
+        double getHandAngle = Math.abs(getHourHandAngle() - getMinuteHandAngle());
+        return getHandAngle;
 
     }
 
@@ -125,12 +130,38 @@ public class Clock{
      *  @return String value of the current clock
      */
 
-    public String toString() {
-      String resultString = " ";
-      if() {
+     public String getTime() {
+      String resultTimeString = " ";
+        if(getHour() <10){
+          resultTimeString = resultTimeString + "0";
+        }
+        resultTimeString = resultTimeString + getHour() + " Hours ";
 
-      }
-        return "Clock string, dangit!";
+        if(getMinutes() < 10){
+         resultTimeString = resultTimeString + "0";
+        }
+        resultTimeString = resultTimeString + getMinutes() + " Minutes ";
+
+        if(getTotalSeconds() % 60 < 10){
+          resultTimeString = resultTimeString + "0";
+        }
+        resultTimeString = resultTimeString + getTotalSeconds() + " Seconds ";
+        System.out.println("resultTimeString:" + resultTimeString);
+        return resultTimeString;
+     }
+
+     public double getHour() {
+       return getMinutes()/60.0;
+     }
+
+     public double getMinutes() {
+       return getTotalSeconds()/60.0 ;
+     }
+//DecimalFormat dec = new DecimalFormat("#,#0.0");
+    public String toString() {
+      System.out.println("time in toString" + getTime());
+      return getTime();
+
     }
     public static void main( String args[] ) {
         System.out.println( "\nCLOCK CLASS TESTER PROGRAM\n" +
@@ -149,6 +180,8 @@ public class Clock{
         }
         catch( Exception e ) {
             System.out.println ( " - Exception thrown: " + e.toString() );
+
         }
+
     }
 }

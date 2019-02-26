@@ -1,28 +1,27 @@
-
-public class ClockSolver extends Clock {
+public class ClockSolver {
 
     /**
-     *  Class field definintions go here
+     * Class field definintions go here
      */
-    private final double MAX_TIME_SLICE_IN_SECONDS  = 1800.00;
+    private final double MAX_TIME_SLICE_IN_SECONDS = 1800.00;
+    private static final double MAXIMUM_DEGREE_VALUE = 360.0;
     private final double DEFAULT_TIME_SLICE_SECONDS = 60.0;
-    private final double EPSILON_VALUE              = 0.1;      // small value for double-precision comparisons
-    double inputTimeSlice = DEFAULT_TIME_SLICE_SECONDS;
-    double inputAngle;
-    /**
-     *  Constructor
-     *  This just calls the superclass constructor, which is "Object"
-     */
+    private final double EPSILON_VALUE = 0.1;      // small value for double-precision comparisons
+    private double inputTimeSlice = DEFAULT_TIME_SLICE_SECONDS;
+    private double inputAngle;
+    private Clock clock;
+
     public ClockSolver() {
         super();
-        Clock clock = new Clock();
+        clock = new Clock();;
+
     }
 
     /**
-     *  Method to handle all the input arguments from the command line
-     *   this sets up the variables for the simulation
+     * Method to handle all the input arguments from the command line
+     * this sets up the variables for the simulation
      */
-    public void handleInitialArguments( String args[] ) {
+    public void handleInitialArguments(String args[]) {
 
 
         // args[0] specifies the angle for which you are looking
@@ -30,58 +29,56 @@ public class ClockSolver extends Clock {
         // args[1] if present will specify a time slice value; if not present, defaults to 60 seconds
         // you may want to consider using args[2] for an "angle window"
 
-        System.out.println( "\n   Hello world, from the ClockSolver program!!\n\n" );
-        if( 0 == args.length ) {
-            System.out.println( "   Sorry you must enter at least one argument\n" +
+        System.out.println("\n   Hello world, from the ClockSolver program!!\n\n");
+        if (0 == args.length) {
+            System.out.println("   Sorry you must enter at least one argument\n" +
                     "   Usage: java ClockSolver <angle> [timeSlice]\n" +
-                    "   Please try again..........." );
-            System.exit( 1 );
-        }else if(args.length >= 1) {
-          try {
-            inputAngle = Double.parseDouble(args[0]);
-          }catch(NumberFormatException e){
-              System.out.println("Please enter Valid Angle");
-              System.exit(0);
-          }
-          if(args.legnth >=2) {
+                    "   Please try again...........");
+            System.exit(1);
+        } else if (args.length >= 1) {
             try {
-                inputTimeSlice = Double.parseDouble(args[1]);
-            }catch(NumberFormatException e){
-                System.out.println("Please enter Valid Number");
+                inputAngle = Double.parseDouble(args[0]);
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter Valid Angle");
                 System.exit(0);
             }
-          if(inputAngle > MAXIMUM_DEGREE_VALUE || inputAngle < 0.0) {
-              throw new IllegalArgumentException("Input a Positive Angle or an Angle Less Than or Equal to 360.0");
-          }
-          if (inpuTimeSlice < 0.0 || inputTimeSlice > MAX_TIME_SLICE_IN_SECONDS){
-              throw new IllegalArgumentException("Input a Positive Value  or a Value less than 1800.0 ");
-          }
-      }
+            if (args.length >= 2) {
+                try {
+                    inputTimeSlice = Double.parseDouble(args[1]);
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter Valid TimeSlice");
+                    System.exit(0);
+                }
+            }
 
-    public void processAngle() {
-      for(int i =0; i<43200; i++){
-        if(inputAngle < (MAXIMUM_DEGREE_VALUE * 0.5) {
-          if(Math.abs(inputAngle - clock.getHandAngle()) < EPSILON_VALUE) {
-                System.out.println(clock.toString());
-           }
+              if (inputAngle > MAXIMUM_DEGREE_VALUE || inputAngle < 0.0) {
+                System.out.println("Input a Positive Angle or an Angle Less Than or Equal to 360.0");
+                System.exit(0);
+              }
+              if(inputTimeSlice > MAX_TIME_SLICE_IN_SECONDS || inputTimeSlice < 0.0){
+                System.out.println("Input a Positive TimeSlice Value or Value Less Than or Equal to 1800.0");
+                System.exit(0);
+              }
+
         }
-      }
-  }
-    /**
-     *  The main program starts here
-     *  remember the constraints from the project description
-     *  @see /johnson.lmu.build/cmsi186web/homework04.html
-     *  @param  args  String array of the arguments from the command line
-     *                args[0] is the angle for which we are looking
-     *                args[1] is the time slice; this is optional and defaults to 60 seconds
-     */
-    public static void main( String args[] ) {
-        ClockSolver cs = new ClockSolver();
-        Clock clock    = new Clock();
-        double[] timeValues = new double[3];
-        cs.handleInitialArguments( args );
-        cs.processAngle();
-        System.exit( 0 );
-
     }
-}
+        public void processAngle() {
+            for (int i = 0; i < 43200 / inputTimeSlice; i++) {
+
+                if (Math.abs(inputAngle - clock.getHandAngle()) < EPSILON_VALUE) {
+                    System.out.println(clock.toString());
+
+                }
+                clock.tick();
+            }
+        }
+
+        public static void main (String[]args){
+            ClockSolver cs = new ClockSolver();
+            double[] timeValues = new double[3];
+            cs.handleInitialArguments(args);
+            cs.processAngle();
+
+
+        }
+    }
