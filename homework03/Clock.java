@@ -4,15 +4,12 @@ public class Clock{
     /**
      *  Class field definintions go here
      */
-    private static final double DEFAULT_TIME_SLICE_IN_SECONDS = 60.0;
+
     private static final double INVALID_ARGUMENT_VALUE = -1.0;
     private static final double MAXIMUM_DEGREE_VALUE = 360.0;
     private static final double HOUR_HAND_DEGREES_PER_SECOND = 0.00834;
     private static final double MINUTE_HAND_DEGREES_PER_SECOND = 0.1;
     private double seconds = 0.0;
-    private double hour = 0.0;
-    private double minutes = 0.0;
-    private double angle;
     private double inputTimeSlice;
     private double minuteHandAngle = 0.0;
     private double hourHandAngle = 0.0;
@@ -22,8 +19,8 @@ public class Clock{
      *  Constructor goes here
      */
 
-    public Clock() {
-
+    public Clock(double inputTimeSlice) {
+		   this.inputTimeSlice = inputTimeSlice;
 
     }
     /**
@@ -34,20 +31,12 @@ public class Clock{
      */
 
 
-    public double tick() {
+    public double tick() { //increment the seconds, and Hand Angles in Tick only
       seconds += inputTimeSlice;
       minuteHandAngle = minuteHandAngle + (MINUTE_HAND_DEGREES_PER_SECOND * inputTimeSlice);
       hourHandAngle = hourHandAngle + (HOUR_HAND_DEGREES_PER_SECOND * inputTimeSlice);
       hourHandAngle %= MAXIMUM_DEGREE_VALUE;
       minuteHandAngle %= MAXIMUM_DEGREE_VALUE;
-
-      // getHourHandAngle();
-      // getMinuteHandAngle();
-      // getHandAngle();
-
-      //System.out.println(minuteHandAngle + "//" + hourHandAngle);
-      System.out.println(minuteHandAngle + "//" + hourHandAngle);
-      System.out.println("timeSlice " +  inputTimeSlice);
 
       return seconds;
     }
@@ -78,8 +67,9 @@ public class Clock{
     public double validateArg( String argValue ) {
       double inputTimeSliceArg = 0.0;
 
-      inputTimeSliceArg = Double.parseDouble(argValue);
-      inputTimeSlice = inputTimeSliceArg;
+      	inputTimeSliceArg = Double.parseDouble(argValue);
+      	inputTimeSlice = inputTimeSliceArg;
+      	System.out.println("inputTimeSLice in validateArg " + inputTimeSlice);
         return inputTimeSlice;
     }
 
@@ -134,54 +124,85 @@ public class Clock{
       String resultTimeString = " ";
         if(getHour() <10){
           resultTimeString = resultTimeString + "0";
-        }
+	    }
         resultTimeString = resultTimeString + getHour() + " Hours ";
+
 
         if(getMinutes() < 10){
          resultTimeString = resultTimeString + "0";
         }
         resultTimeString = resultTimeString + getMinutes() + " Minutes ";
-
-        if(getTotalSeconds() % 60 < 10){
-          resultTimeString = resultTimeString + "0";
+        if(getSeconds() < 10){
+		         resultTimeString = resultTimeString + "0";
         }
-        resultTimeString = resultTimeString + getTotalSeconds() + " Seconds ";
-        System.out.println("resultTimeString:" + resultTimeString);
+        DecimalFormat f = new DecimalFormat("##.00");
+        resultTimeString = resultTimeString + f.format(getSeconds()) + " Seconds ";
+
         return resultTimeString;
      }
 
-     public double getHour() {
-       return getMinutes()/60.0;
+     public int getHour() {
+       if((int)((seconds)/3600) == 0)
+	             return 0;
+
+      return (int)((seconds)/3600);
      }
 
-     public double getMinutes() {
-       return getTotalSeconds()/60.0 ;
+     public int getMinutes() {
+       return (int)((seconds - (getHour()*3600))/60);
      }
+
+     public double getSeconds() {
+		 return (seconds - (getHour() *3600) - (getMinutes()*60)) ;
+ 	 }
 //DecimalFormat dec = new DecimalFormat("#,#0.0");
     public String toString() {
-      System.out.println("time in toString" + getTime());
+
       return getTime();
 
     }
     public static void main( String args[] ) {
-        System.out.println( "\nCLOCK CLASS TESTER PROGRAM\n" +
-                "--------------------------\n" );
-        System.out.println( "  Creating a new clock: " );
-
-        Clock clock = new Clock();
-        clock.getMinuteHandAngle();
-        System.out.println( "    New clock created: " + clock.toString() );
-        // System.out.println("pasta");
-        // System.out.println(clock.getMinuteHandAngle());
-        System.out.println( "    Testing validateAngleArg()....");
-        System.out.print( "      sending '  0 degrees', expecting double value   0.0" );
-        try {
-            System.out.println( (0.0 == clock.validateAngleArg( "0.0" )) ? " - got 0.0" : " - no joy" );
-        }
-        catch( Exception e ) {
-            System.out.println ( " - Exception thrown: " + e.toString() );
-
-        }
-
-    }
+      //   System.out.println( "\nCLOCK CLASS TESTER PROGRAM\n" +
+      //           "--------------------------\n" );
+      //   System.out.println( "  Creating a new clock: " );
+      //
+      //   //Clock clock = new Clock();
+      //     clock = new Clock(inputTimeSlice);
+      //   Clock.getMinuteHandAngle();
+      //   System.out.println( "    New clock created: " + clock.toString() );
+      //
+      //   System.out.println( "    Testing validateAngleArg()....");
+      //   System.out.print( "      sending '  0 degrees', expecting double value   0.0" );
+      //   try {
+      //       System.out.println( (0.0 == Clock.validateAngleArg( "0.0" )) ? " - got 0.0" : " - no joy" );
+      //   }
+      //   catch( Exception e ) {
+      //       System.out.println ( " - Exception thrown: " + e.toString() );
+      //
+      //   }
+      //   System.out.println( "    Testing validateAngleArg()....");
+      //   System.out.print( "      sending '  60.0 degrees', expecting double value   60.0" );
+      //   try {
+      //       System.out.println( (60.0 == Clock.validateAngleArg( "60.0" )) ? " - got 60.0" : " - no joy" );
+      //   }
+      //   catch( Exception e ) {
+      //       System.out.println ( " - Exception thrown: " + e.toString() );
+      //
+      //   }
+      //   System.out.println( "\n    Testing validateTimeSliceArg()....");
+      //   System.out.print( "      sending '  1.0 degrees', expecting double value   1.0" );
+      //   try {
+      //     System.out.println( (1.0 == Clock.validateTimeSliceArg( "1.0" )) ? " - got 1.0" : " - no joy" );
+      //   }catch( Exception e ) {
+      //     System.out.println ( " - Exception thrown: " + e.toString() );
+      // }
+      //   System.out.println("      Current Time Slice is " + Clock.inputTimeSlice);
+      //
+      //
+      //
+      //
+      //
+      //
+      //
+      // }
 }

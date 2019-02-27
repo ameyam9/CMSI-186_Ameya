@@ -11,9 +11,9 @@ public class ClockSolver {
     private double inputAngle;
     private Clock clock;
 
+
     public ClockSolver() {
         super();
-        clock = new Clock();;
 
     }
 
@@ -35,36 +35,39 @@ public class ClockSolver {
                     "   Usage: java ClockSolver <angle> [timeSlice]\n" +
                     "   Please try again...........");
             System.exit(1);
-        } else if (args.length >= 1) {
+        }
+        if (args.length >= 1) {
             try {
                 inputAngle = Double.parseDouble(args[0]);
             } catch (NumberFormatException e) {
                 System.out.println("Please enter Valid Angle");
                 System.exit(0);
             }
-            if (args.length >= 2) {
-                try {
+         if (args.length >= 2) {
+             try {
                     inputTimeSlice = Double.parseDouble(args[1]);
-                } catch (NumberFormatException e) {
+
+             } catch (NumberFormatException e) {
                     System.out.println("Please enter Valid TimeSlice");
                     System.exit(0);
-                }
-            }
+             }
+          }
 
-              if (inputAngle > MAXIMUM_DEGREE_VALUE || inputAngle < 0.0) {
-                System.out.println("Input a Positive Angle or an Angle Less Than or Equal to 360.0");
+          if (inputAngle >= MAXIMUM_DEGREE_VALUE || inputAngle < 0.0) {
+                System.out.println("Input a Positive Angle or an Angle Less Than 360.0");
                 System.exit(0);
-              }
-              if(inputTimeSlice > MAX_TIME_SLICE_IN_SECONDS || inputTimeSlice < 0.0){
+          }
+          if(inputTimeSlice > MAX_TIME_SLICE_IN_SECONDS || inputTimeSlice < 0.0){
                 System.out.println("Input a Positive TimeSlice Value or Value Less Than or Equal to 1800.0");
                 System.exit(0);
-              }
-
+          }
+          clock = new Clock(inputTimeSlice);
         }
     }
         public void processAngle() {
-            for (int i = 0; i < 43200 / inputTimeSlice; i++) {
 
+			long noOfSteps = (long)(43200/inputTimeSlice);
+            for (int i = 0; i < noOfSteps; i++) {
                 if (Math.abs(inputAngle - clock.getHandAngle()) < EPSILON_VALUE) {
                     System.out.println(clock.toString());
 
@@ -75,7 +78,7 @@ public class ClockSolver {
 
         public static void main (String[]args){
             ClockSolver cs = new ClockSolver();
-            double[] timeValues = new double[3];
+            //double[] timeValues = new double[3];
             cs.handleInitialArguments(args);
             cs.processAngle();
 
