@@ -53,21 +53,22 @@ public class ClockSolver {
              }
           }
 
-          if (inputAngle >= MAXIMUM_DEGREE_VALUE || inputAngle < 0.0) {
-                System.out.println("Input a Positive Angle or an Angle Less Than 360.0");
+          if (inputAngle > MAXIMUM_DEGREE_VALUE || inputAngle < 0.0) {
+                System.out.println("Input a Positive Angle or an Angle Less Than or Equal to 360.0");
                 System.exit(0);
           }
           if(inputTimeSlice > MAX_TIME_SLICE_IN_SECONDS || inputTimeSlice < 0.0){
                 System.out.println("Input a Positive TimeSlice Value or Value Less Than or Equal to 1800.0");
                 System.exit(0);
           }
-          clock = new Clock(inputTimeSlice);
+          clock = new Clock(args);
         }
     }
         public void processAngle() {
 
 			long noOfSteps = (long)(43200/inputTimeSlice);
             for (int i = 0; i < noOfSteps; i++) {
+
                 if (Math.abs(inputAngle - clock.getHandAngle()) < EPSILON_VALUE) {
                     System.out.println(clock.toString());
 
@@ -79,7 +80,10 @@ public class ClockSolver {
         public static void main (String[]args){
             ClockSolver cs = new ClockSolver();
             //double[] timeValues = new double[3];
+
             cs.handleInitialArguments(args);
+
+
             cs.processAngle();
 
 
