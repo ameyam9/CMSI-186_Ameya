@@ -1,0 +1,208 @@
+
+CLOCK CLASS TESTER PROGRAM
+--------------------------
+
+  Creating a new clock: 
+    New clock created:  00 Hours 00 Minutes 0.00 Seconds 
+    Testing validateAngleArg()....
+      sending '  0 degrees', expecting double value   0.0 - got 0.0
+      sending '  30 degrees', expecting double value   30.0 - got 30.0
+      sending '  120 degrees', expecting double value   120.0 - got 120.0
+      sending '  359.999999 degrees', expecting double value   359.999999 - got 359.999999
+
+    Testing validateTimeSliceArg()....
+      sending '  12.0 degrees', expecting double value   12.0 - got 10.0
+      Current Time Slice is 10.0
+      sending '  67.4 degrees', expecting double value   67.4 - got 67.4
+      Current Time Slice is 67.4
+      sending '  60.0 degrees', expecting double value   60.0 - got 60.0
+      Current Time Slice is 60.0
+
+   Testing  tick()....
+**Time Slice: 60.0**
+	1 tick --- Total Seconds: 60.0; Minute Hand Angle: 6.0; Hour Hand Angle: 0.5004
+	2 tick --- Total Seconds: 120.0; Minute Hand Angle: 12.0; Hour Hand Angle: 1.0008
+	3 tick --- Total Seconds: 180.0; Minute Hand Angle: 18.0; Hour Hand Angle: 1.5011999999999999
+	59 tick --- Total Seconds: 240.0; Minute Hand Angle: 24.0; Hour Hand Angle: 2.0016
+	60 tick --- Total Seconds: 300.0; Minute Hand Angle: 30.0; Hour Hand Angle: 2.502
+	61 tick --- Total Seconds: 360.0; Minute Hand Angle: 36.0; Hour Hand Angle: 3.0023999999999997
+
+   Hello world, from the ClockSolver program!!
+
+
+   Sorry you must enter at least one argument
+   Usage: java ClockSolver <angle> [timeSlice]
+   Please try again...........
+
+   Hello world, from the ClockSolver program!!
+
+
+Input a Positive Angle or an Angle Less Than or Equal to 360.0
+
+   Hello world, from the ClockSolver program!!
+
+
+Input a Positive TimeSlice Value or Value Less Than or Equal to 1800.0
+
+   Hello world, from the ClockSolver program!!
+
+
+
+   Hello world, from the ClockSolver program!!
+
+
+Input a Positive TimeSlice Value or Value Less Than or Equal to 1800.0
+
+   Hello world, from the ClockSolver program!!
+
+
+Please enter Valid Angle
+
+   Hello world, from the ClockSolver program!!
+
+
+ 01 Hours 00 Minutes 0.00 Seconds 
+
+   Hello world, from the ClockSolver program!!
+
+
+ 01 Hours 00 Minutes 0.00 Seconds 
+ 03 Hours 21 Minutes 50.00 Seconds 
+ 05 Hours 21 Minutes 50.00 Seconds 
+ 07 Hours 43 Minutes 40.00 Seconds 
+ 09 Hours 43 Minutes 40.00 Seconds 
+
+   Hello world, from the ClockSolver program!!
+
+
+ 00 Hours 05 Minutes 27.00 Seconds 
+ 00 Hours 05 Minutes 28.00 Seconds 
+ 01 Hours 00 Minutes 0.00 Seconds 
+ 01 Hours 00 Minutes 01.00 Seconds 
+ 01 Hours 10 Minutes 54.00 Seconds 
+ 01 Hours 10 Minutes 55.00 Seconds 
+ 02 Hours 05 Minutes 27.00 Seconds 
+ 02 Hours 05 Minutes 28.00 Seconds 
+ 02 Hours 16 Minutes 22.00 Seconds 
+ 02 Hours 16 Minutes 23.00 Seconds 
+ 03 Hours 10 Minutes 55.00 Seconds 
+ 03 Hours 10 Minutes 56.00 Seconds 
+ 03 Hours 21 Minutes 49.00 Seconds 
+ 03 Hours 21 Minutes 50.00 Seconds 
+ 03 Hours 21 Minutes 51.00 Seconds 
+ 04 Hours 16 Minutes 22.00 Seconds 
+ 04 Hours 16 Minutes 23.00 Seconds 
+ 04 Hours 16 Minutes 24.00 Seconds 
+ 04 Hours 27 Minutes 17.00 Seconds 
+ 04 Hours 27 Minutes 18.00 Seconds 
+ 05 Hours 21 Minutes 50.00 Seconds 
+ 05 Hours 21 Minutes 51.00 Seconds 
+ 05 Hours 32 Minutes 44.00 Seconds 
+ 05 Hours 32 Minutes 45.00 Seconds 
+ 05 Hours 32 Minutes 46.00 Seconds 
+ 06 Hours 27 Minutes 17.00 Seconds 
+ 06 Hours 27 Minutes 18.00 Seconds 
+ 06 Hours 27 Minutes 19.00 Seconds 
+ 06 Hours 38 Minutes 12.00 Seconds 
+ 06 Hours 38 Minutes 13.00 Seconds 
+ 07 Hours 32 Minutes 45.00 Seconds 
+ 07 Hours 32 Minutes 46.00 Seconds 
+ 07 Hours 43 Minutes 40.00 Seconds 
+ 07 Hours 43 Minutes 41.00 Seconds 
+ 08 Hours 38 Minutes 13.00 Seconds 
+ 08 Hours 38 Minutes 14.00 Seconds 
+ 08 Hours 49 Minutes 07.00 Seconds 
+ 08 Hours 49 Minutes 08.00 Seconds 
+ 09 Hours 43 Minutes 40.00 Seconds 
+ 09 Hours 43 Minutes 41.00 Seconds 
+ 09 Hours 54 Minutes 35.00 Seconds 
+ 09 Hours 54 Minutes 36.00 Seconds 
+ 10 Hours 49 Minutes 08.00 Seconds 
+ 10 Hours 49 Minutes 09.00 Seconds 
+ 11 Hours 54 Minutes 35.00 Seconds 
+ 11 Hours 54 Minutes 36.00 Seconds 
+
+   Hello world, from the ClockSolver program!!
+
+
+ 08 Hours 30 Minutes 0.00 Seconds 
+
+   Hello world, from the ClockSolver program!!
+
+
+ 03 Hours 02 Minutes 42.00 Seconds 
+ 04 Hours 08 Minutes 09.00 Seconds 
+ 05 Hours 13 Minutes 36.00 Seconds 
+ 08 Hours 57 Minutes 22.00 Seconds 
+
+   Hello world, from the ClockSolver program!!
+
+
+ 00 Hours 13 Minutes 40.30 Seconds 
+ 00 Hours 13 Minutes 41.60 Seconds 
+ 01 Hours 19 Minutes 07.60 Seconds 
+ 01 Hours 19 Minutes 08.90 Seconds 
+ 02 Hours 24 Minutes 34.90 Seconds 
+ 02 Hours 24 Minutes 36.20 Seconds 
+ 03 Hours 02 Minutes 41.60 Seconds 
+ 03 Hours 02 Minutes 42.90 Seconds 
+ 03 Hours 30 Minutes 03.50 Seconds 
+ 04 Hours 08 Minutes 08.90 Seconds 
+ 04 Hours 08 Minutes 10.20 Seconds 
+ 04 Hours 35 Minutes 30.80 Seconds 
+ 05 Hours 13 Minutes 36.20 Seconds 
+ 05 Hours 13 Minutes 37.50 Seconds 
+ 05 Hours 40 Minutes 58.10 Seconds 
+ 05 Hours 40 Minutes 59.40 Seconds 
+ 06 Hours 19 Minutes 04.80 Seconds 
+ 06 Hours 46 Minutes 25.40 Seconds 
+ 06 Hours 46 Minutes 26.70 Seconds 
+ 07 Hours 24 Minutes 32.10 Seconds 
+ 07 Hours 51 Minutes 52.70 Seconds 
+ 07 Hours 51 Minutes 54.00 Seconds 
+ 08 Hours 29 Minutes 59.40 Seconds 
+ 08 Hours 30 Minutes 0.70 Seconds 
+ 08 Hours 57 Minutes 21.30 Seconds 
+ 09 Hours 35 Minutes 26.70 Seconds 
+ 09 Hours 35 Minutes 28.00 Seconds 
+ 10 Hours 40 Minutes 54.00 Seconds 
+ 10 Hours 40 Minutes 55.30 Seconds 
+ 11 Hours 46 Minutes 22.60 Seconds 
+
+   Hello world, from the ClockSolver program!!
+
+
+ 00 Hours 16 Minutes 22.50 Seconds 
+ 01 Hours 21 Minutes 50.00 Seconds 
+ 02 Hours 27 Minutes 17.50 Seconds 
+ 03 Hours 00 Minutes 0.00 Seconds 
+ 03 Hours 32 Minutes 45.00 Seconds 
+ 04 Hours 05 Minutes 27.50 Seconds 
+ 04 Hours 38 Minutes 12.50 Seconds 
+ 05 Hours 10 Minutes 55.00 Seconds 
+ 05 Hours 43 Minutes 40.00 Seconds 
+ 06 Hours 16 Minutes 22.50 Seconds 
+ 06 Hours 49 Minutes 07.50 Seconds 
+ 07 Hours 21 Minutes 50.00 Seconds 
+ 07 Hours 54 Minutes 35.00 Seconds 
+ 08 Hours 27 Minutes 17.50 Seconds 
+
+   Hello world, from the ClockSolver program!!
+
+
+ 00 Hours 32 Minutes 43.80 Seconds 
+ 01 Hours 38 Minutes 11.40 Seconds 
+ 02 Hours 43 Minutes 39.00 Seconds 
+ 03 Hours 49 Minutes 06.60 Seconds 
+ 04 Hours 54 Minutes 34.20 Seconds 
+ 06 Hours 00 Minutes 01.80 Seconds 
+ 07 Hours 05 Minutes 29.40 Seconds 
+ 08 Hours 10 Minutes 57.00 Seconds 
+ 09 Hours 16 Minutes 24.60 Seconds 
+ 10 Hours 21 Minutes 52.20 Seconds 
+ 11 Hours 27 Minutes 19.80 Seconds 
+
+   Hello world, from the ClockSolver program!!
+
+
+ 03 Hours 00 Minutes 0.00 Seconds 
