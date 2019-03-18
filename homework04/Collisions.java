@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 public class Collisions {
     public double firstBallXcord;
     public double firstBallYcord;
@@ -7,15 +8,21 @@ public class Collisions {
     public int secondBall;
     public String time;
 
-    public void Collisions(Ball ball1, Ball ball2, int i, int j) {
+    public Collisions(double firstBallXcord, double firstBallYcord, double secondBallXcord, double secondBallYcord ,String time,int i, int j) {
 
-                this.firstBallXcord  =  ball1.getXCord();
+                /*this.firstBallXcord  =  ball1.getXCord();
                 this.firstBallYcord  =  ball1.getYCord();
                 this.secondBallXcord  = ball2.getXCord();
                 this.secondBallYcord  = ball2.getYCord();
-                this.firstBall = i;
-                this.secondBall = j;
-                this.time = time;
+                */
+        this.firstBallXcord = firstBallXcord;
+        this.firstBallYcord = firstBallYcord;
+        this.secondBallXcord = secondBallXcord;
+        this.secondBallYcord = secondBallYcord;
+
+        this.firstBall = i;
+        this.secondBall = j;
+        this.time = time;
 
 
     }

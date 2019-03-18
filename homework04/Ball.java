@@ -1,4 +1,3 @@
-//Ball handles one ball
 public class Ball {
     private static double ballRadius = 4.45;//in inches
     private static double ballWeight = 1; //in pounds
@@ -41,6 +40,19 @@ public class Ball {
     public double getYSpeed() {
         return ySpeed;
     }
+    public void setXCord(double xCord) {
+        this.xCord = xCord;
+    }
+    public void setYCord(double yCord) {
+        this.yCord = yCord;
+    }
+    public void setXSpeed(double xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+    public void setYSpeed(double ySpeed) {
+        this.ySpeed = ySpeed;
+    }
+
 
 
     public void checkSpeed() {
@@ -63,10 +75,10 @@ public class Ball {
         return true;
 //if its out of bound, set it speed to zero, but it needs to be off the field because its stil; can collide
     }
-
+//COnsider speed is Zero if it moving less than 1 inch per second
     public boolean isStillMoving() {
         boolean result = true;
-        if(xSpeed <= 0.0 && ySpeed <= 0.0){
+        if(xSpeed <= 0.084 && ySpeed <= 0.084){
             result = false;
         }
         return result;
@@ -74,15 +86,22 @@ public class Ball {
     }
 
     public void move(double timeSlice) {
-        double timePeriod = timeSlice/60;
-
+        //double[] returnArray= new double[4];
+        double timePeriod = timeSlice;
+        //System.out.println (" Before move in Ball Xcor " + xCord + "ycord " + yCord);
         double xDist = xSpeed * timePeriod;
         double yDist = ySpeed * timePeriod;
         xCord = xCord + xDist;
         yCord = yCord + yDist;
-        xSpeed = timePeriod * (xSpeed *0.99);
-        ySpeed = timePeriod * (ySpeed *0.99);
-
+        //returnArray[0] = xCord;
+        //returnArray[1] = yCord;
+        xSpeed = xSpeed * Math.pow(0.99,timePeriod);
+        ySpeed = ySpeed * Math.pow(0.99,timePeriod);
+        //returnArray[2] = xSpeed;
+        //returnArray[3] = ySpeed;
+        //System.out.println (" After move in Ball Xcor " + xCord + "ycord " + yCord);
+        //return returnArray;
+        return;
 
 
     }
@@ -93,5 +112,4 @@ public class Ball {
 
         return "String rep.";
     }
-
 }
