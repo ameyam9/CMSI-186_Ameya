@@ -3,7 +3,7 @@ public class SoccerSim{
 
     private static final double ballRadius = 4.45 /12.0;//in feet
     private static final double ballWeight = 1; //in pounds
-    private final double DEFAULT_TIME_SLICE_SECONDS = 60.0;
+    private final double DEFAULT_TIME_SLICE_SECONDS = 1.0;
     private double[] xCord = new double[50] ;
     private double[] yCord = new double[50] ;
     private double[] xSpeed = new double[50] ;
@@ -12,8 +12,8 @@ public class SoccerSim{
     private Collisions collArray[] = new Collisions[50];
 
 
-    private double poleX = 0.0;
-    private double poleY = 0.0;
+    private double poleX = 321.0;
+    private double poleY = 543.0;
     private double inputTimeSlice;
     private int totalNumOfBalls;
     int numCollisions = 0;
@@ -64,7 +64,7 @@ public class SoccerSim{
 			}
 
 
-            if(allOutOfBounds() || allBallsStop() || (totalNumberOfBallsHitPole == totalNumOfBalls)) {
+            if(allOutOfBounds() || allBallsStop() || (totalNumberOfBallsHitPole != 0)||(numCollisions != 0) ) {
 
                 report("FINAL");
 
@@ -88,7 +88,7 @@ public class SoccerSim{
     public boolean allOutOfBounds() {
         int numbOutofBounds = 0;
         for(int i = 0; i< totalNumOfBalls; i++){
-            if(Math.abs(balls[i].getXCord())  > fieldXLength/2 || Math.abs(balls[i].getYCord()) > fieldYLength/2){
+            if(Math.abs(balls[i].getXCord())  > fieldXLength/2.0 || Math.abs(balls[i].getYCord()) > fieldYLength/2.0){
                 numbOutofBounds++;
             }
         }
@@ -130,8 +130,8 @@ public class SoccerSim{
                 //System.out.println("second val " + (balls[i].getYCord() - balls[j].getYCord()));
                 distBetweenBalls = Math.sqrt(Math.pow(balls[i].getXCord() - balls[j].getXCord(), 2.0) +
                                              Math.pow(balls[i].getYCord() - balls[j].getYCord(), 2.0));
-                //    System.out.println("distance "+ distBetweenBalls);
-                if (distBetweenBalls <= ballRadius / 2) {
+                // System.out.println("distance "+ distBetweenBalls);
+                if (distBetweenBalls <= (ballRadius * 2.0)) {
                     //System.out.println("COLLISION DETECTED");
                     double firstXCord = balls[i].getXCord();
                     double firstYCord = balls[i].getYCord();
@@ -142,10 +142,12 @@ public class SoccerSim{
                     Collisions newCollision = new Collisions(firstXCord,firstYCord,secondXCord,secondYCord,time.toString(),i,j);
                     collArray[numCollisions] = newCollision;
                     numCollisions++;
-
+                    return;
 
                 }
+
             }
+                return;
         }
 
 
@@ -158,8 +160,8 @@ public class SoccerSim{
         if (whenReporting.equals("FIRST")) {
             System.out.println("Initial Report " + time.toString());
             for(int i = 0; i < totalNumOfBalls; i++) {
-                System.out.print(i + ":   position " + d1.format(xCord[i]) + "," + d1.format(yCord[i]));
-                System.out.println(" velocity " + d1.format(xSpeed[i]) + "," + d1.format(ySpeed[i]));
+                System.out.print(i + ":   position " + "<"+ d1.format(xCord[i]) + "," + d1.format(yCord[i])+ ">");
+                System.out.println(" velocity " + "<" + d1.format(xSpeed[i]) + "," + d1.format(ySpeed[i])+">");
             }
             return;
 
@@ -167,8 +169,8 @@ public class SoccerSim{
             System.out.println("Report At" + time.toString());
             for (int i = 0; i < totalNumOfBalls; i++) {
 				if (!hitPoleBalls[i]) {
-                	System.out.print(i + ":   position " +d1.format(balls[i].getXCord()) + "," + d1.format(balls[i].getYCord()));
-                }	System.out.println(" velocity " + d1.format(balls[i].getXSpeed()) + "," + d1.format(balls[i].getYSpeed()));
+                	System.out.print(i + ":   position " +"<" +d1.format(balls[i].getXCord()) + "," + d1.format(balls[i].getYCord()) + ">");
+                }	System.out.println(" velocity " +"<"+ d1.format(balls[i].getXSpeed()) + "," + d1.format(balls[i].getYSpeed()) +">");
 
             }
             return;
@@ -180,7 +182,8 @@ public class SoccerSim{
 			} else {
 				System.out.print("The following balls hit the pole " );
 				for (int i =0; i < totalNumOfBalls; i ++) {
-					if (hitPoleBalls[i]) { System.out.print( i + " ");}
+					if (hitPoleBalls[i]) {
+            System.out.print( i + " ");}
 				}
 				System.out.println("");
 			}
@@ -194,9 +197,9 @@ public class SoccerSim{
                     System.out.println("The following balls collided " + collArray[i].firstBall + " " + collArray[i].secondBall);
                     System.out.println("Collision occured at " + collArray[i].time);
                     //System.out.println(" Position of first ball");
-                    System.out.println(" First Ball:   position " + d1.format(collArray[i].firstBallXcord) + "," + d1.format(collArray[i].firstBallYcord));
+                    System.out.println(" First Ball:   position " + "<"+ d1.format(collArray[i].firstBallXcord) + "," + d1.format(collArray[i].firstBallYcord) +">");
                     //System.out.println(" Position of second ball");
-                    System.out.println(" Second Ball:   position " + d1.format(collArray[i].secondBallXcord) + "," + d1.format(collArray[i].secondBallYcord));
+                    System.out.println(" Second Ball:   position " +"<"+ d1.format(collArray[i].secondBallXcord) + "," + d1.format(collArray[i].secondBallYcord) +">");
 
                 }
 
@@ -213,7 +216,7 @@ public class SoccerSim{
         boolean result = false;
 
         for(int i = 0; i< totalNumOfBalls; i++) {
-            if (xSpeed[i] <= 0.084 && ySpeed[i] <= 0.084) {
+            if (balls[i].getXSpeed()<= 0.084 && balls[i].getYSpeed() <= 0.084) {
                 result = true;
             }else {
                 return false;
@@ -224,7 +227,7 @@ public class SoccerSim{
     }
     public void handleInitialArguments(String args[]) {
         System.out.println("\n   Hello world, from the SoccerSim Program!!\n");
-        System.out.println("FIELD LENGTH " + fieldXLength + " " + fieldYLength);
+        System.out.println("FIELD LENGTH " + fieldXLength + " by " + fieldYLength);
         System.out.println("POLE POSITION @ " + poleX + " " + poleY);
         if (0 == args.length) {
             System.out.println("Please enter at least eight arguments \n");
@@ -266,6 +269,7 @@ public class SoccerSim{
             for (int i = 0; i < totalNumOfBalls; i++) {
                 try {
                     xCord[i] = Double.parseDouble(args[4 * i]);
+
                     yCord[i] = Double.parseDouble(args[(4 * i) + 1]);
                     if (xCord[i] > fieldXLength / 2 || yCord[i] > fieldXLength / 2 || xCord[i] < -1 * (fieldXLength / 2) || yCord[i] < -1 * (fieldXLength / 2)) {
                         System.out.print("Ball X and Y Cordinates are invalid");
@@ -280,6 +284,10 @@ public class SoccerSim{
             }
             try {
                 inputTimeSlice = Double.parseDouble(args[args.length - 1]);
+                if(inputTimeSlice <=0.0 || inputTimeSlice >= 1800.0){
+                  System.out.println("Invalid Timeslice Value");
+                  System.exit(0);
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid TimeSlice");
             }
