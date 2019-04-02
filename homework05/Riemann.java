@@ -112,7 +112,7 @@ public class Riemann {
             System.out.println("Enter Valid Numbers for UpperBound and LowerBound");
               System.exit(0);
           }
-          System.out.println(("Sum"+integralTrig("cos",lowerBound,upperBound,correctionPercent)));
+          System.out.println(("Sum:"+integralTrig("cos",lowerBound,upperBound,correctionPercent)));
 
         } else if (args[0].equals("tan")) {
           if (args[args.length-1].endsWith("%")){
@@ -162,7 +162,7 @@ public class Riemann {
             System.out.println("Enter Valid Numbers for UpperBound and LowerBound");
               System.exit(0);
           }
-          System.out.println("Sum"+integralLogAndExponent("log",lowerBound,upperBound,correctionPercent));
+          System.out.println("Sum:"+integralLogAndExponent("log",lowerBound,upperBound,correctionPercent));
 
 
         } else if (args[0].equals("exp")){
@@ -188,7 +188,7 @@ public class Riemann {
             System.out.println("Enter Valid Numbers for UpperBound and LowerBound");
 
           }
-          System.out.println("Sum"+integralLogAndExponent("exp",lowerBound,upperBound,correctionPercent));
+          System.out.println("Sum:"+integralLogAndExponent("exp",lowerBound,upperBound,correctionPercent));
 
         }
         else{
