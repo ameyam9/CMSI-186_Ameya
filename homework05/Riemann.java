@@ -1,6 +1,7 @@
 import java.lang.Math;
 import java.lang.String;
 import java.lang.Object;
+import java.io.IOException;
 
 
 public class Riemann {
@@ -14,16 +15,16 @@ public class Riemann {
         boolean existsPercent = false;
 
         double[] coefficients = new double[50];
-        //System.out.println(args.length);
 
 
         if(args[0].equals("runtests")) {
           runMyTests();
+          System.exit(0);
         }
 
         if(args.length < 3){
           System.out.println("Invalid Number of Arguments\n" + "Usage: java Riemann <functionType>, <coeffs 1...k >, <lowerBound>, <UpperBound>, <Optional: Percentage>");
-
+          System.exit(0);
         }
 
 
@@ -31,7 +32,6 @@ public class Riemann {
             if (args[args.length-1].endsWith("%")){
                 numArgs = args.length -1;
                 correctionPercent = Double.parseDouble(args[numArgs].substring(0,args[numArgs].length()-1));
-                System.out.println(correctionPercent);
                 correctionPercent= correctionPercent/100.0;
                 existsPercent = true;
 
@@ -43,6 +43,7 @@ public class Riemann {
             try {
               if(correctionPercent <= 0.0 || correctionPercent >= 100.0 ){
                 System.out.println("Must enter a Valid Percentage between (0,100)");
+                System.exit(0);
               }
 
             lowerBound  = Double.parseDouble(args[numArgs -2]);
@@ -55,10 +56,11 @@ public class Riemann {
 
           } catch(NumberFormatException e){
             System.out.println("Please input Valid Numbers for coeffs,ub or lb");
+              System.exit(0);
           }
 
 
-          System.out.println(integralPoly(coefficients,lowerBound,upperBound,correctionPercent));
+          System.out.println("Sum:" + integralPoly(coefficients,lowerBound,upperBound,correctionPercent));
         }else if (args[0].equals("sin")) {
 
           if (args[args.length-1].endsWith("%")){
@@ -77,14 +79,16 @@ public class Riemann {
             upperBound = Double.parseDouble(args[2]);
             if(correctionPercent <= 0.0 || correctionPercent >= 100.0 ){
               System.out.println("Must enter a Valid Percentage between (0,100)");
+                System.exit(0);
             }
 
           }catch (NumberFormatException e){
             System.out.println("Enter Valid Numbers for UpperBound and LowerBound");
+            System.exit(0);
           }
 
 
-  System.out.println((integralTrig("sin",lowerBound,upperBound,correctionPercent)));
+  System.out.println("Sum:"+(integralTrig("sin",lowerBound,upperBound,correctionPercent)));
         } else if (args[0].equals("cos")) {
           if (args[args.length-1].endsWith("%")){
               numArgs = args.length -1;
@@ -102,11 +106,13 @@ public class Riemann {
             upperBound = Double.parseDouble(args[2]);
             if(correctionPercent <= 0.0 || correctionPercent >= 100.0 ){
               System.out.println("Must enter a Valid Percentage between (0,100)");
+                System.exit(0);
             }
           }catch (NumberFormatException e){
             System.out.println("Enter Valid Numbers for UpperBound and LowerBound");
+              System.exit(0);
           }
-          System.out.println((integralTrig("cos",lowerBound,upperBound,correctionPercent)));
+          System.out.println(("Sum"+integralTrig("cos",lowerBound,upperBound,correctionPercent)));
 
         } else if (args[0].equals("tan")) {
           if (args[args.length-1].endsWith("%")){
@@ -125,12 +131,14 @@ public class Riemann {
             upperBound = Double.parseDouble(args[2]);
             if(correctionPercent <= 0.0 || correctionPercent >= 100.0 ){
               System.out.println("Must enter a Valid Percentage between (0,100)");
+                System.exit(0);
             }
           }catch (NumberFormatException e){
             System.out.println("Enter Valid Numbers for UpperBound and LowerBound");
+              System.exit(0);
           }
 
-          System.out.println((integralTrig("tan",lowerBound,upperBound,correctionPercent)));
+          System.out.println("Sum:"+(integralTrig("tan",lowerBound,upperBound,correctionPercent)));
         } else if (args[0].equals("log")) {
           if (args[args.length-1].endsWith("%")){
               numArgs = args.length -1;
@@ -148,11 +156,13 @@ public class Riemann {
             upperBound = Double.parseDouble(args[2]);
             if(correctionPercent <= 0.0 || correctionPercent >= 100.0 ){
               System.out.println("Must enter a Valid Percentage between (0,100)");
+                System.exit(0);
             }
           }catch (NumberFormatException e){
             System.out.println("Enter Valid Numbers for UpperBound and LowerBound");
+              System.exit(0);
           }
-          System.out.println(integralLogAndExponent("log",lowerBound,upperBound,correctionPercent));
+          System.out.println("Sum"+integralLogAndExponent("log",lowerBound,upperBound,correctionPercent));
 
 
         } else if (args[0].equals("exp")){
@@ -172,18 +182,20 @@ public class Riemann {
             upperBound = Double.parseDouble(args[2]);
             if(correctionPercent <= 0.0 || correctionPercent >= 100.0 ){
               System.out.println("Must enter a Valid Percentage between (0,100)");
+                System.exit(0);
             }
           }catch (NumberFormatException e){
             System.out.println("Enter Valid Numbers for UpperBound and LowerBound");
+
           }
-          System.out.println(integralLogAndExponent("exp",lowerBound,upperBound,correctionPercent));
+          System.out.println("Sum"+integralLogAndExponent("exp",lowerBound,upperBound,correctionPercent));
 
         }
         else{
             System.out.println(" Invalid functions type - The function type has to be poly/sin/cos/tan/log/exp");
             System.exit(0);
         }
-            //System.out.println("Integral Value" + integralPoly());
+
     }
 
 
@@ -202,7 +214,7 @@ public class Riemann {
                 for (int i = 1; i <= ((upperBound - lowerBound) / width); i++){
                     for (int j = 0; j < descriptors.length; j++){
                         area = (width * descriptors[j]) * Math.pow ((double)( (i * width + lowerBound + (i -1) * width + lowerBound) / 2 ), j);
-                        /*Above code computes area of each rectangle */
+
                         sumOfArea += area;
 
                     }
@@ -281,19 +293,87 @@ public class Riemann {
 
               return sumOfArea;
   }
-  private static void runMyTests() {
+
+  private static void runMyTests() { //tried to run tests using a batch file, but was unsucessful
+
+  //   // String path="cmd /c start testIntegral.bat";
+  //   // Runtime rn=Runtime.getRuntime();
+  //   // Process pr=rn.exec(path);
+  //
+  //   try {
+  //     //Process p = Runtime.getRuntime().exec(
+  //   //new String[]{"cmd", "/C", "testIntegralbat"},null);
+  //   String[] command = {"cmd.exe", "/C", "Start", "testIntegral.bat "};
+  //      Process p =  Runtime.getRuntime().exec(command);
+  //
+  // }catch(IOException e) {
+  //     System.out.println(e);
+  // }
+
 
     System.out.println("----Testing Polynomial Integration");
     try {
        double descriptors[] = {1.0,2.0,3.0,5.0};
           System.out.println();
-          System.out.println("Expected Sum with default percent:");
-          System.out.println("Actual Sum:"+ integralPoly(descriptors,3.0,10.0,5.0));
-          //System.out.println("Expected Sum with 5%:");
-          //System.out.println("Actual Sum:" + integralPoly({1.0,2.0,3.0},3.0,10.0,5,0));
+          System.out.println("Expected Sum:13290.21093");
+          System.out.println("Actual Sum:"+ integralPoly(descriptors,3.0,10.0,0.0000001));
+          System.out.println();
+          System.out.println("----Testing Sine Integration");
+          System.out.println("Expected Sum:-0.252");
+          System.out.println("Actual Sum:"+ integralTrig("sin", -4.9,7.4,0.0001));
+          System.out.println();
+          System.out.println("----Testing Cosine Integration");
+          System.out.println("Expected Sum:-0.451");
+          System.out.println("Actual Sum:"+ integralTrig("cos", 12,30,0.0000000003));
+          System.out.println();
+          System.out.println("----Testing Tangent Integration");
+          System.out.println("Expected Sum:37.017");
+          System.out.println("Actual Sum:"+ integralTrig("tan", -4.9,7.4,2.0));
+          System.out.println();
+          System.out.println("----Testing  Integration Exp");
+          System.out.println("Expected Sum:42.931");
+          System.out.println("Actual Sum:"+ integralLogAndExponent("exp", -4.9,7.4,5.0));
+          System.out.println();
+          System.out.println("----Testing  Integration Log");
+          System.out.println("Expected Sum:4.433");
+          System.out.println("Actual Sum:"+ integralLogAndExponent("exp", -15.0,60.0,9.0));
 
-    }catch(NumberFormatException e){
+        }catch(NumberFormatException e){
          System.out.println ( " - Exception thrown: ");
       }
+      try{
+          System.out.println();
+            System.out.println();
+        System.out.println("Testing New Set");
+        double descriptors[] = {-10.7,34.0,-12.5,7.7,9.0};
+           System.out.println();
+           System.out.println("Expected Sum:551594.5929");
+           System.out.println("Actual Sum:"+ integralPoly(descriptors,6.0,12.4,0.0001));
+           System.out.println();
+           System.out.println("----Testing Sine Integration");
+           System.out.println("Expected Sum:-0.0277");
+           System.out.println("Actual Sum:"+ integralTrig("sin", 3,9.7,0.012));
+           System.out.println();
+           System.out.println("----Testing Cosine Integration");
+           System.out.println("Expected Sum:0.424");
+           System.out.println("Actual Sum:"+ integralTrig("cos", 19.0,21.5,7.0));
+           System.out.println();
+           System.out.println("----Testing Tangent Integration");
+           System.out.println("Expected Sum:1.936");
+           System.out.println("Actual Sum:"+ integralTrig("sin", -0.25,3.4,0.00000001));
+           System.out.println();
+           System.out.println("----Testing  Integration Exp");
+           System.out.println("Expected Sum:4.493");
+           System.out.println("Actual Sum:"+ integralLogAndExponent("exp", 134.0,167.3,0.05));
+           System.out.println();
+           System.out.println("----Testing  Integration Log");
+           System.out.println("Expected Sum:1131.431");
+           System.out.println("Actual Sum:"+ integralLogAndExponent("log", 12.0,245.0,12.0));
+
+      }catch(NumberFormatException e){
+
+
+      }
+
   }
 }
