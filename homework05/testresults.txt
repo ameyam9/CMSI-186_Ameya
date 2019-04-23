@@ -10,8 +10,54 @@ Testing the Riemann Ingetration Project Homework # 05
 ...   or preferably output error messages which SHOULD appear there then quit  
 ----Testing Polynomial Integration
 
-Expected Sum with default percent:
-Actual Sum:10597.125
+Expected Sum:13290.21093
+Actual Sum:13469.749828778236
+
+----Testing Sine Integration
+Expected Sum:-0.252
+Actual Sum:-0.2520410189127372
+
+----Testing Cosine Integration
+Expected Sum:-0.451
+Actual Sum:-0.4514587061146146
+
+----Testing Tangent Integration
+Expected Sum:37.017
+Actual Sum:37.01770698851283
+
+----Testing  Integration Exp
+Expected Sum:42.931
+Actual Sum:42.93121837678065
+
+----Testing  Integration Log
+Expected Sum:4.433
+Actual Sum:4.432891547267468E11
+
+
+Testing New Set
+
+Expected Sum:551594.5929
+Actual Sum:551594.5929225006
+
+----Testing Sine Integration
+Expected Sum:-0.0277
+Actual Sum:-0.027678145385758322
+
+----Testing Cosine Integration
+Expected Sum:0.424
+Actual Sum:0.42382377288914613
+
+----Testing Tangent Integration
+Expected Sum:1.936
+Actual Sum:1.9357106182930166
+
+----Testing  Integration Exp
+Expected Sum:4.493
+Actual Sum:4.493439444842951E72
+
+----Testing  Integration Log
+Expected Sum:1131.431
+Actual Sum:1131.431434710119
 .                                                                              
 .                                                                              
 ============================================================================   
@@ -112,35 +158,35 @@ Sum:-20.000000032285783
 Testing valid function name 'sin' with web page args and default               
 ...should produce a result close to '1.9137'                                   
 ============================================================================   
-0.0
+Sum:1.8860015883304213
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'sin' with args -3.45 6.789 and 1.5e-4%           
 ...should produce a result close to '-1.8278'                                  
 ============================================================================   
-0.0
+Sum:-1.8275987200228798
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'sin' with args 0.0 1.0 -3.45 6.789 and 1.5e-4%   
 ...should produce a result close to '-1.8278'                                  
 ============================================================================   
-0.0
+Sum:0.45969776719884925
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'sin' with args -17.0 3.0 -11.0 11.0 and 1e-7%    
 ...should produce a result close to '0.6409'                                   
 ============================================================================   
-0.0
+Sum:0.7148291587222065
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'sin' with args -17.0 1.0 -23.0 23.0 and 1e-4%    
 ...should produce a result close to '-1.6276'                                  
 ============================================================================   
-0.0
+Sum:-0.8154658079634611
 .                                                                              
 .                                                                              
 ============================================================================   
@@ -177,127 +223,93 @@ Testing valid function name 'sqrt' with args 2.0 0.0 1.0 and 1e-3%
 Testing valid function name 'cos' with web page args and default               
 ...should produce a result close to '-0.1326'                                  
 ============================================================================   
-0.0
+Sum:-0.1307269945684324
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'cos' with args -3.45 6.789 and 1.5e-4%           
 ...should produce a result close to '0.1810'                                   
 ============================================================================   
-0.0
+Sum:0.18097881246088313
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'cos' with args 0.0 1.0 -3.45 6.789 and 1.5e-4%   
 ...should produce a result close to '0.1810'                                   
 ============================================================================   
-0.0
+Sum:0.8414711185561216
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'cos' with args -17.0 3.0 -11.0 11.0 and 1e-7%    
 ...should produce a result close to '0.1834'                                   
 ============================================================================   
-0.0
+Sum:-0.8202774840186157
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'cos' with args -17.0 1.0 -23.0 23.0 and 1e-4%    
 ...should produce a result close to '0.4658'                                   
 ============================================================================   
-0.0
+Sum:-0.1199265311967614
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'tan' with args -0.5 1.25 and default              
 ...should produce a result close to '1.0029'                                   
 ============================================================================   
-0.0
+Sum:1.0224900682078248
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'tan' with args -0.5 1.25 and 1.5e-4%             
 ...should produce a result close to '1.0235'                                   
 ============================================================================   
-0.0
+Sum:1.0235752838398278
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'tan' with args 0.0 1.0 -0.5 1.25 and 1.5e-4%     
 ...should produce a result close to '1.0235'                                   
 ============================================================================   
-0.0
+Sum:0.6156263740046155
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'log' with args 0.0 1.0 1.1 2.3 and 1e-5%         
 ...should produce a result close to '0.6109'                                   
 ============================================================================   
-0.0
+Sum:-0.9999999173704864
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'log'                                              
 ...should produce a result close to '0.6140'                                   
 ============================================================================   
-0.0
+Sum:0.6126155890425509
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'exp' with web page args and default prct          
 ...should produce a result close to '25.5763'                                  
 ============================================================================   
-0.0
+Sum:25.688749315797367
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'exp' with web page args and 1.6e-7%              
 ...should produce a result close to '25.7264'                                  
 ============================================================================   
-0.0
+Sum:25.726395850776758
 .                                                                              
 .                                                                              
 ============================================================================   
 Testing valid function name 'exp' with 0.0 1.0 2.0 3.5 and 1e-7%              
 ...should produce a result close to '25.7264'                                  
 ============================================================================   
-0.0
+Sum:1.718281828192326
 .                                                                              
 .                                                                              
 ============================================================================   
 End of Testing                                                                 
 ============================================================================   
-Invalid Number of Arguments
-Usage: java Riemann <functionType>, <coeffs 1...k >, <lowerBound>, <UpperBound>, <Optional: Percentage>
-Invalid Number of Arguments
-Usage: java Riemann <functionType>, <coeffs 1...k >, <lowerBound>, <UpperBound>, <Optional: Percentage>
-Invalid Number of Arguments
-Usage: java Riemann <functionType>, <coeffs 1...k >, <lowerBound>, <UpperBound>, <Optional: Percentage>
-Invalid Number of Arguments
-Usage: java Riemann <functionType>, <coeffs 1...k >, <lowerBound>, <UpperBound>, <Optional: Percentage>
-Sum:0.0
-Sum:0.0
-Sum:0.0
-Sum:0.0
-Sum:2.0
-Sum:18.000000016763806
-Sum:18.017578125
-Sum:1290.234375
-Sum:-20.000000032285783
-Sum:1.8860015883304213
-Sum:-1.8275987200228798
-Sum:0.45969776719884925
-Sum:0.7148291587222065
-Sum:-0.8154658079634611
-Sum-0.1307269945684324
-Sum0.18097881246088313
-Sum0.8414711185561216
-Sum-0.8202774840186157
-Sum-0.1199265311967614
-Sum:1.0224900682078248
-Sum:1.0224900682078248
-Sum:0.6140631849127998
-Sum-0.9945949600330559
-Sum0.6126155890425509
-Sum25.688749315797367
-Sum1.718281828192326
