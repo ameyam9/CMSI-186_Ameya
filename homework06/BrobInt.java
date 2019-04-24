@@ -1,3 +1,30 @@
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * File name  :  BrobInt.java
+ * Purpose    :  Learning exercise to implement arbitrarily large numbers and their operations
+ * @author    :  Ameya
+ * Date       :  2017-04-04
+ * Description:  @see <a href='http://bjohnson.lmu.build/cmsi186web/homework06.html'>Assignment Page</a> for more info
+ * Notes      :  None
+ * Warnings   :  None
+ *
+ *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Revision History
+ * ================
+ *   Ver      Date     Modified by:  Reason for change or modification
+ *  -----  ----------  ------------  ---------------------------------------------------------------------
+ *  1.0.0                     Ameya  Initial writing and begin coding
+ *  1.1.0                     Ameya  Updated  the ADD method to be consices
+
+ *  1.2.0                     Ameya  Added comments/ javadoc
+ *
+ *
+ *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
+
+
+
+
 
 
 import java.util.ArrayList;
@@ -13,9 +40,12 @@ public class BrobInt {
     public static final BrobInt THREE = new BrobInt("3");
     public static final BrobInt TEN = new BrobInt("10");
 
-    // Constructor that takes String and converts to an ArrayList of integers
-    //It also checks for sign and sets a boolean
-    //Corrects the length accordingly
+    /** Constructor that takes String and converts to an ArrayList of integers
+    It also checks for sign and sets a boolean
+    Corrects the length accordingly
+    Constructor Also validates the args, so no ValidateArg method is used
+    */
+
     public BrobInt(String value) {
         long intLength = value.length();
         int positionWithinString = 0;
@@ -64,6 +94,11 @@ public class BrobInt {
         this.intNegative = negative;
     }
 
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+       *  Method to add the value of a BrobIntk passed as argument to this BrobInt
+       *  @param  bint         BrobInt to add to this
+       *  @return BrobInt that is the sum of the value of this BrobInt and the one passed in
+       *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     public BrobInt add(BrobInt value) {
         if (intNegative == value.intNegative) {
             // Both sign are the same so the result will have the same sign.
@@ -104,7 +139,11 @@ public class BrobInt {
 
         return result;
     }
-
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+       *  Method to subtract the value of a BrobIntk passed as argument to this BrobInt
+       *  @param  value         BrobInt to subtract from this
+       *  @return BrobInt that is the difference of the value of this BrobInt and the one passed in
+       *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     public BrobInt subtract(BrobInt value) {
         return add(new BrobInt(value, true));
     }
@@ -145,6 +184,13 @@ public class BrobInt {
 
         return removeLeadingZeroes(abs(new BrobInt(calculationIntList, false)));
     }
+
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+       *  Method to multiply the value of a BrobIntk passed as argument to this BrobInt
+       *  @param  value         BrobInt to multiply this by
+       *  @return BrobInt that is the product of the value of this BrobInt and the one passed in
+       *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 
     public BrobInt multiply(BrobInt value) {
         BrobInt calculation = new BrobInt(abs(this).multiplyPositiveInt(abs(value)));
@@ -190,7 +236,11 @@ public class BrobInt {
 
         return new BrobInt(calculation, false);
     }
-
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+       *  Method to divide the value of this BrobIntk by the BrobInt passed as argument
+       *  @param  value         BrobInt to divide this by
+       *  @return BrobInt that is the dividend of this BrobInt divided by the one passed in
+       *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     public BrobInt divide(BrobInt value) {
         BrobInt counter = ZERO;
         BrobInt temp = ZERO;
@@ -206,6 +256,15 @@ public class BrobInt {
         }
         return counter;
     }
+
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+       *  Method to get the remainder of division of this BrobInt by the one passed as argument
+       *  @param  value         BrobInt to divide this one by
+       *  @return BrobInt that is the remainder of division of this BrobInt by the one passed in
+       *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
+
 
     public BrobInt remainder(BrobInt value) {
         if (abs(this).compareTo(abs(value)) == -1) {
