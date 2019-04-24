@@ -1,12 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- * @author ameyam
- */
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +6,7 @@ import java.util.List;
 
 public class BrobInt {
     private final List<Integer> intArrayList;
-    final boolean intNegative;
+    public final boolean intNegative;
     public static final BrobInt ZERO = new BrobInt("0");
     public static final BrobInt ONE = new BrobInt("1");
     public static final BrobInt TWO = new BrobInt("2");
@@ -32,10 +24,6 @@ public class BrobInt {
             intNegative = true;
             positionWithinString++;
         } else {
-            if (value.length() > 1 && value.substring(0, 1).equals("+")) {
-                // skip over explicit '+' sign
-                positionWithinString++;
-            }
             intNegative = false;
         }
         boolean leadingZero = true;
@@ -68,7 +56,7 @@ public class BrobInt {
 
     private BrobInt(BrobInt value, boolean negate) {
         this.intNegative = value.intNegative ^ negate;
-        this.intArrayList = value.intArrayList; // intArrayList is immutable, so no copy needed.
+        this.intArrayList = new ArrayList<>(value.intArrayList);
     }
 
     private BrobInt(List<Integer> digits, boolean negative) {
@@ -77,13 +65,9 @@ public class BrobInt {
     }
 
     public BrobInt add(BrobInt value) {
-
-        if (intNegative == value.intNegative) {//if signs of both are same
-            if (intNegative) {// if they are negative add as positives and add negative sign
-                BrobInt temp = abs(this).addPositiveInt(abs(value));
-                return new BrobInt(temp, true);
-            }
-            return abs(this).addPositiveInt(abs(value)); //if both positive
+        if (intNegative == value.intNegative) {
+            // Both sign are the same so the result will have the same sign.
+            return new BrobInt(addDigits(this.intArrayList, value.intArrayList), intNegative);
         } else if (abs(this).compareTo(abs(value)) == 1) {
             if (intNegative) {
                 BrobInt temp = abs(this).subtractPositiveInt(abs(value));
@@ -101,120 +85,76 @@ public class BrobInt {
         }
     }
 
-    public BrobInt addPositiveInt(BrobInt value) {
+    private List<Integer> addDigits(List<Integer> a1, List<Integer> a2) {
         int carryOver = 0;
-        int counter = 0;
-        String strTemp = "";
 
-        int size = this.intArrayList.size();
-        if (size > value.intArrayList.size()) {
-            size = value.intArrayList.size();
+        int size = Math.max(a1.size(), a2.size());
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int counter = 0; counter < size; counter++) {
+            int d1 = counter >= a1.size() ? 0 : a1.get(a1.size() - 1 - counter);
+            int d2 = counter >= a2.size() ? 0 : a2.get(a2.size() - 1 - counter);
+            int bitAddition = d1 + d2 + carryOver;
+            carryOver = bitAddition / 10;
+            bitAddition = bitAddition % 10;
+            result.add(0, bitAddition);
         }
-        for (int index = size - 1; index >= 0; index--) {
-            int bitAddition = value.intArrayList.get(value.intArrayList.size() - 1 - counter) + intArrayList.get(intArrayList.size() - 1 - counter) + carryOver;
-            carryOver = (int) (bitAddition / 10);
-            bitAddition = (int) bitAddition % 10;
-            strTemp = bitAddition + strTemp + "";
-            counter++;
+        if (carryOver > 0) {
+            result.add(0, carryOver);
         }
-        List<Integer> largerBrobIntList = ((this.intArrayList.size() > value.intArrayList.size()) ? intArrayList : value.intArrayList);
-        int currentIndex = largerBrobIntList.size() - counter - 1;
-        for (int index = currentIndex; index >= 0; index--) {
-            if (carryOver != 0) {
-                int temp = largerBrobIntList.get(index) + carryOver;
-                carryOver = (temp == 10 ? 1 : 0);
-                temp = (temp == 10 ? 0 : temp);
-                strTemp = temp + strTemp + "";
-            } else {
-                strTemp = largerBrobIntList.get(index) + strTemp + "";
-            }
-        }
-        if (carryOver != 0) {
-            strTemp = carryOver + strTemp + "";
-        }
-        if (strTemp.equals("") || strTemp.equals(" ")) {
-            return ZERO;
-        }
-        return new BrobInt(strTemp);
+
+        return result;
     }
 
     public BrobInt subtract(BrobInt value) {
-        if (compareTo(value) == 0) {
-            return ZERO;
-        } else if (intNegative == value.intNegative) {// Check if both have same sign
-            if (intNegative) {
-                return add(abs(value));
-            }
-            return add(new BrobInt(value, true));
-        } else if (abs(this).compareTo(abs(value)) == 1) {
-            if (intNegative) {
-                BrobInt temp = abs(this).addPositiveInt(abs(value));
-                return new BrobInt(temp, true);
-            } else {
-                return abs(this).addPositiveInt(abs(value));
-            }
-        } else {
-            if (intNegative) {
-                BrobInt temp = abs(this).addPositiveInt(abs(value));
-                return new BrobInt(temp, true);
-            } else {
-                return abs(this).addPositiveInt(abs(value));
-            }
-        }
+        return add(new BrobInt(value, true));
     }
 
-    public BrobInt subtractPositiveInt(BrobInt value) {
+    private BrobInt subtractPositiveInt(BrobInt value) {
         int rowSubtraction;
         ArrayList<Integer> calculationIntList = new ArrayList<>();
-        List<Integer> largerValueBrobIntList = compareTo(value) == 1 ? intArrayList : value.intArrayList;
-        List<Integer> smallerValueBrobIntList = compareTo(value) == 1 ? value.intArrayList : intArrayList;
-        int size = smallerValueBrobIntList.size() < largerValueBrobIntList.size() ? smallerValueBrobIntList.size() : largerValueBrobIntList.size();
-        int carry = 0;
-        int count = 0;
-        for (int index = size - 1; index >= 0; index--) {
-            if (compareTo(value) == 1 ? true : false) {
-                rowSubtraction = largerValueBrobIntList.get(intArrayList.size() - 1 - count) - smallerValueBrobIntList.get(value.intArrayList.size() - 1 - count) - carry;
-            } else {
-                rowSubtraction = largerValueBrobIntList.get(value.intArrayList.size() - 1 - count) - smallerValueBrobIntList.get(intArrayList.size() - 1 - count) - carry;
-            }
-            carry = 0;
-            if (rowSubtraction < 0 && !(index == 0 && this.intArrayList.size() == value.intArrayList.size())) {
+        List<Integer> largerValue;
+        List<Integer> smallerValue;
+        if (compareTo(value) == 1) {
+            largerValue = intArrayList;
+            smallerValue = value.intArrayList;
+        } else {
+            largerValue = value.intArrayList;
+            smallerValue = intArrayList;
+        }
+
+        int size = Math.max(smallerValue.size(), largerValue.size());
+        int carryOver = 0;
+        int counter;
+        for (counter = 0; counter < size; counter++) {
+            int d1 = counter >= largerValue.size() ? 0 : largerValue.get(largerValue.size() - 1 - counter);
+            int d2 = counter >= smallerValue.size() ? 0 : smallerValue.get(smallerValue.size() - 1 - counter);
+            rowSubtraction = d1 - d2 - carryOver;
+            if (rowSubtraction < 0) {
                 rowSubtraction += 10;
-                carry = 1;
+                carryOver = 1;
+            } else {
+                carryOver = 0;
             }
             calculationIntList.add(0, rowSubtraction);
-            count++;
         }
-        List<Integer> largerBrobIntList = ((this.intArrayList.size() > value.intArrayList.size()) ? intArrayList : value.intArrayList);
-        int currentIndex = largerBrobIntList.size() - count - 1;
-        for (int index = currentIndex; index >= 0; index--) {
-            if (carry != 0) {
-                int temp = largerBrobIntList.get(index) - carry;
-                if (temp < 0) {
-                    temp += 10;
-                    carry++;
-                }
-                calculationIntList.add(0, temp);
-                carry--;
-            } else {
-                calculationIntList.add(0, largerBrobIntList.get(index));
-            }
+
+        if (carryOver != 0) {
+            rowSubtraction = 10 - carryOver;
+            calculationIntList.add(0, rowSubtraction);
         }
-        if (calculationIntList.get(0) == 0) {
-            calculationIntList.remove(0);
-        }
+
         return removeLeadingZeroes(abs(new BrobInt(calculationIntList, false)));
     }
 
     public BrobInt multiply(BrobInt value) {
-        BrobInt calc = new BrobInt(abs(this).multiplyPositiveInt(abs(value)));
+        BrobInt calculation = new BrobInt(abs(this).multiplyPositiveInt(abs(value)));
         if (value.equals(ZERO) || equals(ZERO)) {
             return ZERO;
         }
         if (value.intNegative == intNegative) {
-            return calc;
+            return calculation;
         } else {
-            return new BrobInt(calc, true);
+            return new BrobInt(calculation, true);
         }
     }
 
@@ -222,33 +162,33 @@ public class BrobInt {
         ArrayList<List<Integer>> additionValues = new ArrayList<>();
         List<Integer> largerBrobIntList = (this.intArrayList.size() > value.intArrayList.size()) ? intArrayList : value.intArrayList;
         List<Integer> smallerBrobIntList = (this.intArrayList.size() > value.intArrayList.size()) ? value.intArrayList : intArrayList;
-        int count = 0;
+        int counter = 0;
         for (int index = smallerBrobIntList.size() - 1; index >= 0; index--) {
-            int carry = 0;
+            int carryOver = 0;
             ArrayList<Integer> newDigits = new ArrayList<>();
             additionValues.add(0, newDigits);
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < counter; i++) {
                 newDigits.add(0, 0);
             }
             for (int bigIndex = largerBrobIntList.size() - 1; bigIndex >= 0; bigIndex--) {
-                int temp = largerBrobIntList.get(bigIndex) * smallerBrobIntList.get(index) + carry;
+                int temp = largerBrobIntList.get(bigIndex) * smallerBrobIntList.get(index) + carryOver;
 
-                carry = (int) (temp / 10);
-                temp = (int) (temp % 10);
+                carryOver = temp / 10;
+                temp = temp % 10;
                 newDigits.add(0, temp);
             }
-            if (carry != 0) {
-                newDigits.add(0, carry);
+            if (carryOver != 0) {
+                newDigits.add(0, carryOver);
             }
-            count++;
+            counter++;
         }
 
-        BrobInt calculation = ZERO;
+        List<Integer> calculation = new ArrayList<>();
         for (int i = 0; i < additionValues.size(); i++) {
-            calculation = calculation.addPositiveInt(new BrobInt(additionValues.get(i), false));
+            calculation = addDigits(calculation, additionValues.get(i));
         }
 
-        return abs(calculation);
+        return new BrobInt(calculation, false);
     }
 
     public BrobInt divide(BrobInt value) {
@@ -309,6 +249,9 @@ public class BrobInt {
     }
 
     public String toString() {
+        if (allZeroDetect(this)) {
+            return "0";
+        }
         String str = intNegative ? "-" : "";
         int i = 0;
         if (intArrayList.size() > 0) {
@@ -322,8 +265,6 @@ public class BrobInt {
     }
 
     public int compareTo(BrobInt value) {
-        //System.out.println(this.toString());
-        //System.out.println(value.toString());
         int sign = intNegative ? -1 : 1;
         if (value.intNegative != this.intNegative) {
             return sign;
@@ -346,13 +287,11 @@ public class BrobInt {
         }
     }
 
-    public boolean equals(Object x) {
-        return x.toString().equals(toString());
+    public boolean equals(Object b) {
+        return b.toString().equals(toString());
     }
 
     public static BrobInt valueOf(long value) {
-        String strValue = "" + value;
-        BrobInt br = new BrobInt(strValue);
-        return br;
+        return new BrobInt(Long.toString(value));
     }
 }
